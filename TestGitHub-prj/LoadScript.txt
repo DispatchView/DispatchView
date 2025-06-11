@@ -1,0 +1,142 @@
+﻿///$tab Main
+SET ThousandSep=',';
+SET DecimalSep='.';
+SET MoneyThousandSep=',';
+SET MoneyDecimalSep='.';
+SET MoneyFormat='$#,##0.00;-$#,##0.00';
+SET TimeFormat='h:mm:ss TT';
+SET DateFormat='M/D/YYYY';
+SET TimestampFormat='M/D/YYYY h:mm:ss[.fff] TT';
+SET FirstWeekDay=6;
+SET BrokenWeeks=1;
+SET ReferenceDay=0;
+SET FirstMonthOfYear=1;
+SET CollationLocale='en-US';
+SET MonthNames='Jan;Feb;Mar;Apr;May;Jun;Jul;Aug;Sep;Oct;Nov;Dec';
+SET LongMonthNames='January;February;March;April;May;June;July;August;September;October;November;December';
+SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
+SET LongDayNames='Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday';
+
+SET TEST1;
+SET TEST2;
+
+GitHubConnector_UserRepositories:
+LOAD
+    Full_Name as UserRepositories_Full_Name,
+    Owner as UserRepositories_Owner,
+    Description as UserRepositories_Description,
+    Is_Private as UserRepositories_Is_Private,
+    Created as UserRepositories_Created,
+    Timestamp(timestamp#(left(Created, 10) & ' ' & mid(Created, 12, 8), 'YYYY-MM-DD hh:mm:ss')) as UserRepositories_Created_qlik_timestamp,
+    Date(date#(left(Created, 10), 'YYYY-MM-DD')) as UserRepositories_Created_qlik_date,
+    Time(time#(mid(Created, 12, 8), 'hh:mm:ss')) as UserRepositories_Created_qlik_time,
+    Updated as UserRepositories_Updated,
+    Timestamp(timestamp#(left(Updated, 10) & ' ' & mid(Updated, 12, 8), 'YYYY-MM-DD hh:mm:ss')) as UserRepositories_Updated_qlik_timestamp,
+    Date(date#(left(Updated, 10), 'YYYY-MM-DD')) as UserRepositories_Updated_qlik_date,
+    Time(time#(mid(Updated, 12, 8), 'hh:mm:ss')) as UserRepositories_Updated_qlik_time,
+    Pushed as UserRepositories_Pushed,
+    Timestamp(timestamp#(left(Pushed, 10) & ' ' & mid(Pushed, 12, 8), 'YYYY-MM-DD hh:mm:ss')) as UserRepositories_Pushed_qlik_timestamp,
+    Date(date#(left(Pushed, 10), 'YYYY-MM-DD')) as UserRepositories_Pushed_qlik_date,
+    Time(time#(mid(Pushed, 12, 8), 'hh:mm:ss')) as UserRepositories_Pushed_qlik_time,
+    Forks_Count as UserRepositories_Forks_Count,
+    Default_Branch as UserRepositories_Default_Branch,
+    Size as UserRepositories_Size,
+    Language as UserRepositories_Language,
+    Open_Issues_Count as UserRepositories_Open_Issues_Count,
+    Admin as UserRepositories_Admin,
+    Push_Permission as UserRepositories_Push_Permission,
+    Pull_Permission as UserRepositories_Pull_Permission,
+    Archived as UserRepositories_Archived,
+    License_Name as UserRepositories_License_Name,
+    Disabled as UserRepositories_Disabled,
+    Stargazers_Count as UserRepositories_Stargazers_Count,
+    Watchers_Count as UserRepositories_Watchers_Count
+FROM
+[http://localhost:5555/data?connectorID=GitHubConnector&table=UserRepositories&appID=](qvx);
+
+// IMPORTANT: If, when loading the above script, you receive a 'Script Error' Dialog box with a 'Field Not Found'
+// (or other) error, the first thing you should do is copy and paste the full request URL (i.e. the URL between the square [...]
+// brackets IN THE QLIKVIEW / QLIK SENSE SCRIPT ERROR DIALOG) into a browser address bar and check the response.
+
+LOAD %Qop_key, 
+     [%Expertisebureau deelrapport], 
+     %Qdr_key, 
+     [%Opdracht deelrapport], 
+     [%Rapport deelrapport], 
+     %Deelrapport, 
+     [%Filter beoordeling], 
+     [%Filterversie beoordeling], 
+     [%Soort overige waarde], 
+     [%Soort schadebedrag], 
+     [Aantal harde signalen beoordeling], 
+     [Aantal zachte signalen beoordeling], 
+     [Afgekeurd door beoordeling], 
+     [Advies beoordeling], 
+     [AE arbeidstarief 1], 
+     [AE arbeidstarief 2], 
+     [AE arbeidstarief 3], 
+     [AE arbeidstarief 4], 
+     [AE arbeidstarief 5], 
+     [AE Spuittarief], 
+     [AE Spuittarief 2], 
+     [Afkorting deelrapport], 
+     [Aftrek eerdere reparaties], 
+     [Aftrek eerste schade], 
+     [Aftrek eigen risico], 
+     [Aftrek geen aantasting], 
+     [Aftrek geen herstel], 
+     [Aftrek NVO], 
+     Arbeidsloon, 
+     [Arbeidstarief 1], 
+     [Arbeidstarief 2], 
+     [Arbeidstarief 3], 
+     [Arbeidstarief 4], 
+     [Arbeidstarief 5], 
+     [Bijkomende kosten], 
+     [BTW Reparatiekosten], 
+     [Dagwaarde schadebedrag excl. BTW], 
+     [Dagwaarde schadebedrag incl. BTW], 
+     Deelrapport, 
+     [Deelrapport BTW schadebedrag], 
+     [Deelrapport schadebedrag excl. BTW], 
+     [Deelrapport schadebedrag incl. BTW], 
+     [Drempel technisch advies beoordeling], 
+     [Filter beoordeling], 
+     [Filterversie beoordeling], 
+     [Gewogen score beoordeling], 
+     [Jobprijs reparaties], 
+     [Jobprijs vervanging], 
+     [Korting onderdelen], 
+     [Korting spuiten], 
+     Milieutoeslag, 
+     Onderdelen, 
+     [Overige kosten], 
+     [Overige waarde schadebedrag excl. BTW], 
+     [Overige waarde schadebedrag incl. BTW], 
+     [Poliswaarde schadebedrag excl. BTW], 
+     [Poliswaarde schadebedrag incl. BTW], 
+     [Punten harde signalen beoordeling], 
+     [Punten technisch advies beoordeling], 
+     [Punten zachte signalen beoordeling], 
+     [Reparatiekosten excl. BTW], 
+     [Reparatiekosten incl. BTW], 
+     Reparaties, 
+     [Soort overige waarde], 
+     [Soort schadebedrag], 
+     Spuiten, 
+     Spuitmateriaal, 
+     [Spuittarief 1], 
+     [Spuittarief 2], 
+     [Statistisch advies beoordeling], 
+     [Technisch advies beoordeling], 
+     [Toeslag onderdelen], 
+     [Toeslag spuiten], 
+     Vervanging, 
+     QDR_BEDRINBTWINBPM, 
+     QDR_BEDRINBTWEXBPM, 
+     QDR_BEDREXBTWINBPM, 
+     QDR_BEDREXBTWEXBPM, 
+     #DRcounter
+FROM
+[D:\Dispatch View\Auto\001.Ontwikkel\001.DispatchAuto\2.QVD\1.MI\900O_Deelrapporten.qvd]
+
